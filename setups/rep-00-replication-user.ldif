@@ -1,0 +1,10 @@
+# this user has to be set on every supplier and consumer
+
+dn: cn=replication manager,cn=config
+objectClass: inetorgperson
+objectClass: person
+objectClass: top
+cn: replication manager
+sn: RM
+userPassword: password
+passwordExpirationTime: 20380119031407Z

@@ -1,0 +1,17 @@
+# create this replica on every supplier and consumer
+# nsds5replicatype is 3 for every supplier and 2 for every consumer
+# nsds5flags is 1 for every supplier and 0 for every consumer (writable changelog)
+# nsds5ReplicaPurgeDelay and nsds5replicaid not necessary on consumers
+
+dn: cn=replica,cn="dc=example,dc=com",cn=mapping tree,cn=config
+objectclass: top
+objectclass: nsds5replica
+objectclass: extensibleObject
+cn: replica
+nsds5replicaroot: dc=example,dc=com
+nsds5replicaid: 7
+nsds5replicatype: 3
+nsds5flags: 1
+nsds5ReplicaPurgeDelay: 604800
+nsds5ReplicaBindDN: cn=replication manager,cn=config
+

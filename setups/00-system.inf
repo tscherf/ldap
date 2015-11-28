@@ -1,0 +1,41 @@
+# setup ldap user and group
+useradd -r ldap
+groupadd -r ldap
+
+# setup os requirements
+echo "* - nofile 8192" >> /etc/security/limits.conf
+
+sysctl -w "fs.file-max=64000"
+sysctl -w "net.ipv4.ip_local_port_range=1024 65000"
+
+# check if this system is subscribed to RHN
+if (! yum repolist > /dev/null 2>&1); then
+    echo "System is not subscribed to RHN/RHNS. Exiting now."
+fi
+
+# check for java package
+if (! rpm -q java-1.6.0-openjdk > /dev/null 2>&1); then
+    echo "OpenJDK is not installed. Installing it now."
+    yum install -y java-1.6.0-openjdk 
+    if [ $? -ne 0 ]; then
+        echo "OpenJDK installation failed. Exiting now."
+        exit 1
+    fi
+fi
+
+# set the proper java path
+alternatives --set java /usr/lib/jvm/jre-1.6.0-openjdk/bin/java
+
+# check for redhat-ds installation
+if (!rpm -q redhat-ds > /dev/null 2>&1); then
+    echo "Red Hat Directory Server is not installed. Installing it now."
+    yum install -y redhat-ds
+    if [ $? -ne 0 ]; then
+        echo "OpenJDK installation failed. Exiting now."
+        exit 1
+    fi
+fi
+
+# call the main setup tool
+/usr/sbin/setup-ds-admin.pl --silent --logfile /root/rhds.log --file=01-setup.inf
+

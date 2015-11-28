@@ -1,0 +1,62 @@
+# ldapmodify -v -x -a -h vws0044 -p 3389 -D "cn=Directory Manager" -w welcome -f  <File Name>
+dn: cn=Example,cn=ldbm database,cn=plugins,cn=config
+changetype: add
+objectClass: top
+objectClass: extensibleObject
+objectClass: nsBackendInstance
+cn: Example
+nsslapd-suffix: dc=example,dc=com
+nsslapd-cachesize: -1
+nsslapd-cachememsize: 10485760
+nsslapd-directory: /var/lib/dirsrv/slapd-tscherf54/db/Example
+
+dn: cn=dc\3Dexample\2Cdc\3Dcom,cn=mapping tree,cn=config
+changetype: add
+objectClass: top
+objectClass: extensibleObject
+objectClass: nsMappingTree
+nsslapd-state: Backend
+cn: dc=example,dc=com
+nsslapd-backend: Example
+
+dn: dc=example,dc=com
+changetype: add
+aci: (targetattr != "nsroledn||aci")(version 3.0; acl "Allow self entry modification except for nsroledn and aci attributes"; allow (write)userdn ="ldap:///self";)
+dc: example
+objectClass: top
+objectClass: domain
+
+dn: ou=People,dc=example,dc=com
+changetype: add
+ou: People
+objectClass: top
+objectClass: organizationalunit
+
+dn: ou=Groups,dc=example,dc=com
+changetype: add
+ou: Groups
+objectClass: top
+objectClass: organizationalunit
+
+dn: cn=password_admins,ou=Groups,dc=example,dc=com
+changetype: add
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: password admins
+ou: groups
+uniqueMember: cn=admin1,ou=People,dc=example,dc=com
+
+dn: cn=admin1,ou=People,dc=example,dc=com
+changetype: add
+objectClass: top
+objectClass: person
+cn: admin1
+sn: admin1
+userPassword: Secret123
+
+dn: cn=user985270,ou=People,dc=example,dc=com
+changetype: add
+objectClass: top
+objectClass: person
+cn: user985270
+sn: user985270

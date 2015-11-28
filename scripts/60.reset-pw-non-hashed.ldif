@@ -1,0 +1,5 @@
+# ldapmodify -v -x -a -h vws0044 -p 3389 -D "cn=admin1,ou=People,dc=example,dc=com" -w Secret123 -f <File Name>
+dn: cn=user985270,ou=People,dc=example,dc=com
+changetype: modify
+replace: userPassword
+userPassword: Secret123!

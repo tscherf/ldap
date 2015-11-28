@@ -1,0 +1,74 @@
+# ldapmodify -v -x -a -h vws0044 -p 3389 -D "cn=Directory Manager" -w welcome -f  <File Name>
+dn: cn=nsPwPolicyContainer,ou=People,dc=example,dc=com
+changetype: add
+objectClass: nsContainer
+objectClass: top
+cn: nsPwPolicyContainer
+
+dn: cn=cn\3DnsPwPolicyEntry\2Cou\3DPeople\2Cdc\3Dexample\2Cdc\3Dcom,cn=nsPwPolicyContainer,ou=People,dc=example,dc=com
+changetype: add
+objectClass: ldapsubentry
+objectClass: passwordpolicy
+objectClass: top
+cn: cn=nsPwPolicyEntry,ou=People,dc=example,dc=com
+
+dn: cn=cn\3DnsPwTemplateEntry\2Cou\3DPeople\2Cdc\3Dexample\2Cdc\3Dcom,cn=nsPwPolicyContainer,ou=People,dc=example,dc=com
+changetype: add
+objectClass: extensibleObject
+objectClass: costemplate
+objectClass: ldapsubentry
+objectClass: top
+cosPriority: 1
+pwdpolicysubentry: cn=cn\3DnsPwPolicyEntry\2Cou\3DPeople\2Cdc\3Dexample\2Cdc\3
+ Dcom,cn=nsPwPolicyContainer,ou=People,dc=example,dc=com
+cn: cn=nsPwTemplateEntry,ou=People,dc=example,dc=com
+
+dn: cn=nsPwPolicy_CoS,ou=People,dc=example,dc=com
+changetype: add
+objectClass: ldapsubentry
+objectClass: cosSuperDefinition
+objectClass: cosPointerDefinition
+objectClass: top
+costemplatedn: cn=cn\3DnsPwTemplateEntry\2Cou\3DPeople\2Cdc\3Dexample\2Cdc\3Dc
+ om,cn=nsPwPolicyContainer,ou=People,dc=example,dc=com
+cosAttribute: pwdpolicysubentry default operational-default
+cn: nsPwPolicy_CoS
+
+dn: cn="cn=nsPwPolicyEntry,ou=People,dc=example,dc=com",cn=nsPwPolicyContainer,ou=People,dc=example,dc=com
+changetype: modify
+replace: passwordMustChange
+passwordMustChange: off
+-
+replace: passwordMinAlphas
+passwordMinAlphas: 1
+-
+replace: passwordExp
+passwordExp: off
+-
+replace: passwordHistory
+passwordHistory: off
+-
+replace: passwordMinDigits
+passwordMinDigits: 1
+-
+replace: passwordMinAge
+passwordMinAge: 0
+-
+replace: passwordMinLowers
+passwordMinLowers: 1
+-
+replace: passwordChange
+passwordChange: off
+-
+replace: passwordMinUppers
+passwordMinUppers: 1
+-
+replace: passwordCheckSyntax
+passwordCheckSyntax: on
+-
+replace: passwordStorageScheme
+passwordStorageScheme: ssha256
+-
+#add: passwordAdminDN
+replace: passwordAdminDN
+passwordAdminDN: cn=password_admins,ou=Groups,dc=example,dc=com

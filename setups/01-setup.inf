@@ -1,0 +1,35 @@
+[General]
+FullMachineName = ldap.example.com
+SuiteSpotUserID = ldap
+SuiteSpotGroup = ldap
+AdminDomain = example.com
+ConfigDirectoryAdminID = admin
+ConfigDirectoryAdminPwd = redhat
+ConfigDirectoryLdapURL = ldap://ldap.example.com:389/o=NetscapeRoot
+
+[admin]
+ServerAdminID = admin
+ServerAdminPwd = redhat
+SysUser = ldap
+#ServerIpAddress = 1.2.3.4
+Port = 9830
+
+[slapd]
+# setup this server as Config Directory and don't register to a different server 
+SlapdConfigForMC = yes
+UseExistingMC = 0
+#
+ServerIdentifier = ldap
+ServerPort = 389
+AddOrgEntries = yes
+RootDN = cn=Directory Manager
+RootDNPwd = redhat123
+Suffix = dc=example,dc=com
+AddSampleEntries = no
+
+#InstallLdifFile = suggest
+ConfigFile = rep-00-replication-user.ldif
+ConfigFile = rep-01-replica.inf
+ConfigFile = rep-02-changelog.ldif
+ConfigFile = rep-03-agreement.ldif 
+

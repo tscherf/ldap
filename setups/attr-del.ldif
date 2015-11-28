@@ -1,0 +1,4 @@
+dn: cn=Barney Fife,ou=People,dc=example,dc=com
+changetype: modify
+delete: telephonenumber
+

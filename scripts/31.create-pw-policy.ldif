@@ -1,0 +1,40 @@
+# ldapmodify -v -x -a -h vws0044 -p 3389 -D "cn=Directory Manager" -w welcome -f  <File Name>
+
+dn: cn="cn=nsPwPolicyEntry,ou=People,dc=example,dc=com",cn=nsPwPolicyContainer,ou=People,dc=example,dc=com
+changetype: modify
+add: passwordMustChange
+passwordMustChange: off
+-
+add: passwordMinAlphas
+passwordMinAlphas: 1
+-
+add: passwordExp
+passwordExp: off
+-
+add: passwordHistory
+passwordHistory: off
+-
+add: passwordMinDigits
+passwordMinDigits: 1
+-
+add: passwordMinAge
+passwordMinAge: 0
+-
+add: passwordMinLowers
+passwordMinLowers: 1
+-
+add: passwordChange
+passwordChange: off
+-
+add: passwordMinUppers
+passwordMinUppers: 1
+-
+add: passwordCheckSyntax
+passwordCheckSyntax: on
+-
+add: passwordStorageScheme
+passwordStorageScheme: ssha256
+-
+#add: passwordAdminDN
+add: passwordAdminDN
+passwordAdminDN: cn=password_admins,ou=Groups,dc=example,dc=com

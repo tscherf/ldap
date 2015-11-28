@@ -1,0 +1,16 @@
+dn: uid=tom,ou=People,dc=tuxgeek,dc=de
+objectClass: top
+objectClass: account
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: Thorsten Scherf
+uid: tom
+uidNumber: 3000
+gidNumber: 3000
+homeDirectory: /home/tom
+loginShell: /bin/bash
+gecos: Matt Nichols,Teacher,Room 16,626-135-0011,409-111-1372
+userPassword: {crypt}x
+shadowLastChange: 0
+shadowMax: 0
+shadowWarning: 0

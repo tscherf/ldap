@@ -1,0 +1,5 @@
+# ldapmodify -v -x -a -h vws0044 -p 3389 -D "cn=Directory Manager" -w welcome -f  <File Name>
+dn: cn=config
+changetype: modify
+replace: nsslapd-pwpolicy-local
+nsslapd-pwpolicy-local: on

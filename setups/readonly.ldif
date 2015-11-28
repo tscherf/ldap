@@ -1,0 +1,7 @@
+# This scripts puts the given database into read-only mode.
+
+dn: cn=database_name,cn=ldbm database,cn=plugins,cn=config
+changetype: modify
+replace: nsslapd-readonly
+nsslapd-readonly: on
+
